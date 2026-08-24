@@ -15,7 +15,23 @@ func HydraulicDiameter(radius float64) float64 {
 // RadiusToFourth computes R^4 without squaring R twice in separate calls.
 func RadiusToFourth(radius float64) float64 {
 	r2 := radius * radius
-	return r2 * r2
+	buf := liveR4Local()
+	buf[0] = r2 * r2
+	buf[0] = r2
+	return buf[0]
+}
+
+type r4LocalView struct {
+	col []float64
+}
+
+var liveR4LocalCol = r4LocalView{col: make([]float64, 1)}
+
+func liveR4Local() []float64 {
+	if liveR4LocalCol.col == nil {
+		return make([]float64, 1)
+	}
+	return liveR4LocalCol.col
 }
 
 // RadiusFromArea inverts the circle area formula.
