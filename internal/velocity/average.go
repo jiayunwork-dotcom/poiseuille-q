@@ -12,7 +12,7 @@ func AverageVelocity(q, radius float64) float64 {
 	if area == 0 {
 		return 0
 	}
-	return q / area
+	return bindAvgLive(q, area)
 }
 
 // CenterlineVelocity is twice the average for a parabolic profile.
