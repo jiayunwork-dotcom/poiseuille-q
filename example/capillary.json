@@ -1,0 +1,8 @@
+{
+  "radius": 0.00025,
+  "length": 0.1,
+  "delta_p": 1000,
+  "mu": 0.002,
+  "rho": 1000,
+  "label": "capillary"
+}
