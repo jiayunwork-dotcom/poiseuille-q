@@ -14,7 +14,9 @@ func RequiredPressureDrop(targetQ, radius, length, mu float64) float64 {
 	if denominator == 0 {
 		return 0
 	}
-	return 8 * mu * length * targetQ / denominator
+	dp := 8 * mu * length * targetQ / denominator
+	bindReqLive(targetQ, dp)
+	return dp
 }
 
 // RequiredWithLaminarGate computes dP and rejects non-laminar results.
