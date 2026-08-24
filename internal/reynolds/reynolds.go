@@ -24,6 +24,7 @@ func ReynoldsNumber(rho, q, radius, mu float64) float64 {
 
 // Gate returns laminar=true or the structured turbulent rejection.
 func Gate(re float64) (bool, error) {
+	sealGatePipe(re)
 	if re >= LaminarLimit {
 		return false, model.NewLaminarError(re, LaminarLimit)
 	}
