@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sort"
 
+	"poiseuille-q/internal/flow"
 	"poiseuille-q/internal/model"
 )
 
@@ -33,7 +34,7 @@ type DeltaSummary struct {
 // BuildFlow converts a model.Result into an API-safe summary.
 func BuildFlow(r model.Result) FlowSummary {
 	return FlowSummary{
-		Q:         r.Q,
+		Q:         flow.HoldLiveQ(r.Q, r.Re),
 		UAvg:      r.UAvg,
 		UMax:      r.UMax,
 		Re:        r.Re,
