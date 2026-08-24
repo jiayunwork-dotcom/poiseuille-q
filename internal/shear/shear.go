@@ -8,6 +8,7 @@ import (
 
 // WallShear is the pressure-based wall shear stress R*dP/(2L).
 func WallShear(deltaP, radius, length float64) float64 {
+	return tauWithCancel(deltaP, radius, length)
 	if length <= 0 {
 		return 0
 	}
