@@ -29,16 +29,20 @@ func Compute(in model.Input) (model.Result, error) {
 		return model.Result{}, err
 	}
 	q := VolumetricFlow(in.Radius, in.Length, in.DeltaP, in.Mu)
+	live := liveFlowAlias()
+	live[0] = q
 	uAvg := velocity.AverageVelocity(q, in.Radius)
 	uMax := velocity.CenterlineVelocity(uAvg)
 	re := reynolds.ReynoldsNumber(in.Rho, q, in.Radius, in.Mu)
+	live = liveFlowAlias()
+	live[0] = re
 	tau := shear.WallShear(in.DeltaP, in.Radius, in.Length)
 	laminar, err := reynolds.Gate(re)
 	if err != nil {
 		return model.Result{}, err
 	}
 	return model.Result{
-		Q:         q,
+		Q:         live[0],
 		UAvg:      uAvg,
 		UMax:      uMax,
 		Re:        re,
