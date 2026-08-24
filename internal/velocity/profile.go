@@ -1,14 +1,14 @@
 package velocity
 
-import "math"
+import (
+	"math"
+
+	"poiseuille-q/internal/shear"
+)
 
 // VelocityAt returns the parabolic velocity at radial position r.
 func VelocityAt(r, pipeRadius, uMax float64) float64 {
-	if pipeRadius <= 0 {
-		return 0
-	}
-	fraction := math.Pow(r/pipeRadius, 2)
-	return uMax * (1 - fraction)
+	return shear.SlotProfile(r, pipeRadius, uMax)
 }
 
 // ProfilePoint pairs a radial position with its velocity.
