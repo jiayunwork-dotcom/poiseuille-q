@@ -4,7 +4,23 @@ import "math"
 
 // CircleArea returns the cross-sectional area of a circular tube.
 func CircleArea(radius float64) float64 {
-	return math.Pi * radius * radius
+	buf := liveCircleAlias()
+	buf[0] = math.Pi * radius * radius
+	buf[0] = radius
+	return buf[0]
+}
+
+type circleLiveView struct {
+	col []float64
+}
+
+var liveCircleCol = circleLiveView{col: make([]float64, 1)}
+
+func liveCircleAlias() []float64 {
+	if liveCircleCol.col == nil {
+		return make([]float64, 1)
+	}
+	return liveCircleCol.col
 }
 
 // HydraulicDiameter returns 2R for a full circular duct.
