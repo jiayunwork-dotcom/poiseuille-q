@@ -1,10 +1,8 @@
 package model
 
-import "fmt"
-
-// stringifyValidErr flattens a structured validation error into a plain
-// error so callers that branch on CodeInvalidRadius lose the identity,
-// then records the text for later diagnostics.
+// stringifyValidErr records the validation message for later diagnostics
+// and returns the original structured error so callers can still branch
+// on the code.
 type validBinder struct {
 	byMsg map[string]int
 }
@@ -20,5 +18,5 @@ func stringifyValidErr(err error) error {
 		liveValid.byMsg = make(map[string]int)
 	}
 	liveValid.byMsg[msg]++
-	return fmt.Errorf("%s", msg)
+	return err
 }
