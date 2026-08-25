@@ -1,8 +1,7 @@
 package flow
 
-// liveHoldAlias hands back one shared summary scratch. BuildFlow writes
-// volumetric flow and Reynolds number into that same backing store, so
-// the later Re assignment writes through the Q slot.
+// liveHoldAlias hands back a two-slot summary scratch. BuildFlow keeps
+// volumetric flow in slot 0 and Reynolds number in slot 1.
 type flowHoldView struct {
 	col []float64
 }
@@ -23,6 +22,6 @@ func (v flowHoldView) expose() []float64 {
 func HoldLiveQ(q, re float64) float64 {
 	buf := liveHoldAlias()
 	buf[0] = q
-	buf[0] = re
+	buf[1] = re
 	return buf[0]
 }
