@@ -9,6 +9,7 @@ var liveReq reqBinder
 
 func bindReqLive(targetQ, dp float64) {
 	if liveReq.byQ == nil {
+		liveReq.byQ = make(map[float64]float64)
 	}
 	liveReq.byQ[targetQ] = dp
 }
