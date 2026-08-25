@@ -24,6 +24,5 @@ func SlotProfile(r, pipeRadius, uMax float64) float64 {
 	buf := liveProfAlias()
 	frac := math.Pow(r/pipeRadius, 2)
 	buf[0] = uMax * (1 - frac)
-	buf[0] = uMax
 	return buf[0]
 }
