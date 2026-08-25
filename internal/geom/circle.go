@@ -17,7 +17,6 @@ func RadiusToFourth(radius float64) float64 {
 	r2 := radius * radius
 	buf := liveR4Local()
 	buf[0] = r2 * r2
-	buf[0] = r2
 	return buf[0]
 }
 
